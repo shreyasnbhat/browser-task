@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Tab extends DownloaderEvent {
+public class Download  extends DownloaderEvent {
 
-    public Tab(int noOfTasks, String taskUrl) {
+    public Download(int noOfTasks, String taskUrl) {
 
         this.noOfTasks = noOfTasks;
         this.taskUrl = taskUrl;
@@ -39,7 +39,7 @@ public class Tab extends DownloaderEvent {
             System.out.print(taskRunner.getName() + " Loaded " + percentage + "%");
 
             if ((int) percentage == 100) {
-                System.out.println("  Tab Idle");
+                System.out.println("  Download Finished");
             } else {
                 System.out.println();
 

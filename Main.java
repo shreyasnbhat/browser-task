@@ -4,6 +4,6 @@ public class Main {
 
         Tab tab1 = new Tab(10,"google.com");
         Tab tab2 = new Tab(5,"amazon.com");
-
+        Download d1 = new Download(3,"bing.com");
     }
 }
