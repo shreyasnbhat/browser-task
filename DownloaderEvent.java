@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public abstract class DownloaderEvent implements ThreadCompletionListener{
+public abstract class DownloaderEvent implements ThreadCompletionListener {
 
     protected int noOfTasks;
     protected String taskUrl;
@@ -10,9 +10,16 @@ public abstract class DownloaderEvent implements ThreadCompletionListener{
 
     @Override
     public void notifyOfThreadCompletion(Runnable runner) {
-        onCompletionPrint(runner);
+        if (runner instanceof Task) {
+            Task taskRunner = (Task) runner;
+            this.totalTaskTimeCompleted += taskRunner.getSize();
+            float percentage = ((float) this.totalTaskTimeCompleted / (float) this.totalTaskTime) * 100;
+            System.out.print(taskRunner.getName() + " Loaded " + (int) percentage + "%");
+
+            postCompletionPrint(percentage);
+        }
     }
 
-    public abstract void onCompletionPrint(Runnable runner);
+    public abstract void postCompletionPrint(float percentage);
 
 }

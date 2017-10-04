@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Download  extends DownloaderEvent {
+public class Download extends DownloaderEvent {
 
     public Download(int noOfTasks, String taskUrl) {
 
@@ -31,19 +31,13 @@ public class Download  extends DownloaderEvent {
 
     }
 
-    public void onCompletionPrint(Runnable runner){
-        if (runner instanceof Task) {
-            Task taskRunner = (Task) runner;
-            this.totalTaskTimeCompleted += taskRunner.getSize();
-            float percentage = ((float) this.totalTaskTimeCompleted / (float) this.totalTaskTime) * 100;
-            System.out.print(taskRunner.getName() + " Loaded " + percentage + "%");
+    @Override
+    public void postCompletionPrint(float percentage) {
+        if ((int) percentage == 100) {
+            System.out.println("  Download Completed");
+        } else {
+            System.out.println();
 
-            if ((int) percentage == 100) {
-                System.out.println("  Download Finished");
-            } else {
-                System.out.println();
-
-            }
         }
     }
 }

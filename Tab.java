@@ -31,19 +31,13 @@ public class Tab extends DownloaderEvent {
 
     }
 
-    public void onCompletionPrint(Runnable runner){
-        if (runner instanceof Task) {
-            Task taskRunner = (Task) runner;
-            this.totalTaskTimeCompleted += taskRunner.getSize();
-            float percentage = ((float) this.totalTaskTimeCompleted / (float) this.totalTaskTime) * 100;
-            System.out.print(taskRunner.getName() + " Loaded " + percentage + "%");
+    @Override
+    public void postCompletionPrint(float percentage) {
+        if ((int) percentage == 100) {
+            System.out.println("  Tab Idle");
+        } else {
+            System.out.println();
 
-            if ((int) percentage == 100) {
-                System.out.println("  Tab Idle");
-            } else {
-                System.out.println();
-
-            }
         }
     }
 }
