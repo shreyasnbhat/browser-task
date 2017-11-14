@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class DownloaderEvent implements ThreadCompletionListener {
+public abstract class Event implements ThreadCompletionListener {
 
     protected int noOfTasks;
     protected String taskUrl;
@@ -9,7 +9,7 @@ public abstract class DownloaderEvent implements ThreadCompletionListener {
     protected int totalTaskTimeCompleted = 0;
     protected ArrayList<Integer> taskTimes;
 
-    public DownloaderEvent(int noOfTasks, String taskUrl) {
+    public Event(int noOfTasks, String taskUrl) {
         this.noOfTasks = noOfTasks;
         this.taskUrl = taskUrl;
         this.totalTaskTime = 0;
@@ -46,6 +46,16 @@ public abstract class DownloaderEvent implements ThreadCompletionListener {
             postCompletionPrint(percentage);
         }
     }
+
+    @Override
+    public void notifyOfThreadHalfCompletion(Runnable runner) {
+        if(runner instanceof Task){
+          Task taskRunner = (Task) runner;
+          System.out.println(taskRunner.getName() + ": Task is about to finish");
+        }
+
+    }
+
 
     public abstract void postCompletionPrint(float percentage);
 

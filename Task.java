@@ -20,26 +20,24 @@ public class Task implements Runnable {
         }
     }
 
+    public void notifyThreadHalfCompletion(){
+      if(listener != null){
+        listener.notifyOfThreadHalfCompletion(this);
+      }
+    }
+
     @Override
     public void run() {
 
         int timeRemaining = this.size;
 
-        while (timeRemaining > 0) {
-            try {
-                if (timeRemaining > 10) {
-                    Thread.sleep(10);
-                    timeRemaining -= 10;
-                } else {
-                    Thread.sleep(timeRemaining);
-                    timeRemaining = 0;
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        try {
+              Thread.sleep(this.size);
+        } catch (InterruptedException e) {
+              e.printStackTrace();
+        } finally {
+          notifyThreadCompletion();
         }
-
-        notifyThreadCompletion();
     }
 
     public int getSize() {

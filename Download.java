@@ -1,4 +1,4 @@
-public class Download extends DownloaderEvent {
+public class Download extends Event {
 
     public Download(int noOfTasks, String taskUrl) {
         super(noOfTasks, taskUrl);

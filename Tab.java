@@ -1,4 +1,4 @@
-public class Tab extends DownloaderEvent {
+public class Tab extends Event {
 
     public Tab(int noOfTasks, String taskUrl) {
         super(noOfTasks, taskUrl);
